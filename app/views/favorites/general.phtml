@@ -1,0 +1,39 @@
+<?php echo $this->tag->javascriptInclude('js/nasa/app.nasa.js')?>
+<?php echo $this->tag->javascriptInclude('js/nasa/service.nasa.js')?>
+<?php echo $this->tag->javascriptInclude('js/nasa/controller.nasa.js')?>
+
+<div class="container" ng-app="nasa" ng-controller="dataController as ctrl" ng-cloak>
+    <h2>Favorites</h2>
+    <table class="table">
+        <thead>
+        <th>ID</th>
+        <th>Rover Name</th>
+        <th>Camera Name</th>
+        <th>Earth Date</th>
+        <th>Image</th>
+        <th>Action</th>
+        </thead>
+        <tbody>
+            <tr ng-repeat="fv in ctrl.favorites">
+                <td>{{ fv.id}}</td>
+                <td>{{ fv.rover.name}}</td>
+                <td>{{ fv.camera.full_name}}</td>
+                <td>{{ fv.earth_date}}</td>
+                <td><img class="img-fluid img-thumbnail" width="100" height="100" ng-src="{{fv.img_src}}"></td>
+                <td>
+                    <button class="btn btn-primary" ng-click="ctrl.manageFavorites(fv)">
+                        {{( fv.status == undefined || fv.status == false) ? 'Add favorite' :'Remove Favorite'}}
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="row">
+        <div class="col"></div>
+        <div class="col">
+            <button class="btn btn-primary" ng-click="ctrl.loadMore()">Load more</button>
+        </div>
+    </div>
+
+</div>
